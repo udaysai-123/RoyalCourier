@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="courierService"
+		class="org.dxc.royalCourier.service.CourierService">
+		<property name="cBoObj" ref="courierBoObj" />
+
+	</bean>
+	<context:property-placeholder location="classpath:charges.properties" />
+	<bean id="courier" class="org.dxc.royalCourier.model.Courier">
+
+		<property name="chargePerkg" value="${chargePerKg}" />
+		<property name="serviceCharge" ref="servicechargeinfo" />
+	</bean>
+
+	<bean id="servicechargeinfo"
+		class="org.dxc.royalCourier.model.ServiceChargeInfo">
+		<property name="locationServicecharge">
+			<map>
+				<entry key="Coimbatore" value="200" />
+				<entry key="Chennai" value="300" />
+				<entry key="Madurai" value="150" />
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="courierBoObj" class="org.dxc.royalCourier.BO.CourierBO"></bean>
+
+
+
+</beans>
+
+
